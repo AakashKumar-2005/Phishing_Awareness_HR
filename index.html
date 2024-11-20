@@ -3,113 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phishing Awareness Exercise</title>
+    <title>Phishing Email Awareness</title>
     <style>
-        /* General Styling */
-        body { 
-            font-family: Arial, sans-serif; 
-            color: #333333; 
-            text-align: center; 
-            padding: 50px; 
+        /* General body styling */
+        body {
             margin: 0;
-            background: linear-gradient(135deg, #f05053, #e1eec3); /* Attractive background gradient */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        
-        /* Container Styling */
-        .container { 
-            max-width: 600px; 
-            background: rgba(255, 255, 255, 0.9); /* Slightly translucent white */
-            border-radius: 12px; 
-            padding: 20px 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1.5s ease;
-        }
-
-        /* Title and Subtitle */
-        .title { 
-            font-size: 28px; 
-            font-weight: bold; 
-            color: #cc0000;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            animation: slideIn 1.5s ease forwards;
-        }
-
-        .subtitle { 
-            font-size: 20px; 
-            color: #0073e6; 
-            margin-top: 10px; 
-            margin-bottom: 20px;
-            animation: slideIn 1.8s ease forwards;
-        }
-
-        /* Content and List Styling */
-        .content { 
-            font-size: 16px; 
-            text-align: left;
-            animation: fadeIn 2s ease;
-        }
-
-        ul { 
-            list-style: none; 
             padding: 0;
-            animation: fadeIn 2.5s ease;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
-        ul li {
-            background: #cc0000;
-            color: #ffffff;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
-            transition: transform 0.3s ease, background 0.3s ease;
+        /* Thunder background styling */
+        .background-thunder {
+            position: absolute;
+            
+            width: 100%;
+            height: 100%;
+            background: url('lightning-storm.gif') center/cover no-repeat;
+            z-index: -1;
+            margin-top: 0%;
+            animation: thunder-fade 15s forwards;
+        }
+
+        /* Rain background styling */
+        .background-rain {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('rain-8252.gif') center/cover no-repeat;
+            z-index: -1;
+            display: none;
+        }
+
+        /* THUDD message styling */
+        .thudd-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 5rem;
+            color: white;
             font-weight: bold;
+            text-shadow: 2px 2px 10px red, 0 0 30px red, 0 0 50px yellow;
+            z-index: 1;
+            opacity: 0;
+            animation: thudd-zoom 1s 3s forwards, thudd-fade-out 0.5s 5s forwards;
         }
 
-        ul li:hover {
-            transform: scale(1.05);
-            background: #ff5e5e; /* Lighter red on hover */
+        /* Keyframes for THUDD message */
+        @keyframes thudd-zoom {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
 
-        /* Keyframes for Animations */
-        @keyframes fadeIn {
+        @keyframes thudd-fade-out {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Content container */
+        .content {
+            position: absolute;
+            color: antiquewhite;
+            right: 25%;
+            left: 25%;
+            text-align: center;
+            padding: 30px;
+            font-size: 1rem;
+            margin-top: 10%;
+            opacity: 0;
+            animation: fade-in 1s 6s forwards; /* Delayed appearance of content */
+        }
+
+        /* Unique animation effects */
+        @keyframes thunder-fade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fade-in {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes slideIn {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* Instructions with unique styles */
+        .alert {
+            background: rgba(49, 46, 46, 0.8);
+            margin: 10px auto;
+            padding: 20px;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(255, 0, 0);
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            body { padding: 20px; }
-            .title { font-size: 24px; }
-            .subtitle { font-size: 18px; }
-            ul li { font-size: 14px; }
+        .alert-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.5rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <p class="title">You've Been Part of a Phishing Awareness Exercise!</p>
-        <div class="content">
-            <p>This simulated phishing email was designed to help you identify phishing tactics and stay vigilant against real threats. Here are some key tips to help you avoid phishing attacks:</p>
-            <ul>
-                <li><strong>Verify the Sender:</strong> Check the sender’s email address for spelling or unusual domains.</li>
-                <li><strong>Look for Digital Signatures in Company Emails:</strong> Use digital signatures to confirm the sender’s identity.</li>
-                <li><strong>Question Unusual Attachments:</strong>Emails with unexpected attachments should always be verified with the sender before opening</li>
-                <li><strong>Check Grammar and Spelling: Phishing emails often contain noticeable errors in grammar or spelling</li>
-                <li><strong>Report Suspicious Emails:</strong> If an email seems unusual, report it to the IT or security team.</li>
-            </ul>
-            <p>Stay vigilant and help us keep our organization secure!</p>
+    <!-- Backgrounds -->
+    <div class="background-thunder"></div>
+    <div class="background-rain"></div>
+
+    <!-- THUDD Message -->
+    <div class="thudd-message">THUDD!!!!!! This is a phishing email!</div>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="alert">
+            <span class="alert-icon">⚠️</span>
+                       Avoid clicking on unknown links or attachments
         </div>
-    </div>
+        <div class="alert">
+            <span class="alert-icon">⚠️</span>
+                          Verify the sender’s email address carefully
+
+        </div>
+        <div class="alert">
+            <span class="alert-icon">⚠️</span>
+            Report suspicious emails to the Security Desk immediately      </div>
+    
+    <div class="alert">
+        <span class="alert-icon">⚠️</span>
+                         Do not share sensitive information via email
+     </div>
+</div>
+
+    <!-- Sound Effect -->
+    <audio id="thunder-sound" src="thunderclap.mp3"></audio>
+
+    <script>
+        // Play thunder sound
+        const thunderSound = document.getElementById('thunder-sound');
+        setTimeout(() => {
+            thunderSound.play();
+        }, 3000); // Play sound after thunder animation
+
+        // Switch to rain background
+        setTimeout(() => {
+            document.querySelector('.background-thunder').style.display = 'none';
+            document.querySelector('.background-rain').style.display = 'block';
+        }, 4000); // Switch after thunder fades
+
+        // Remove THUDD message after display duration
+        setTimeout(() => {
+            document.querySelector('.thudd-message').style.display = 'none';
+        }, 5000); // Remove THUDD message after it fades out
+    </script>
 </body>
 </html>
