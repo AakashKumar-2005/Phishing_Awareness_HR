@@ -133,15 +133,10 @@
      </div>
 </div>
 
-    <!-- Sound Effect -->
-    <audio id="thunder-sound" src="thunderclap.mp3"></audio>
+    
 
     <script>
-        // Play thunder sound
-        const thunderSound = document.getElementById('thunder-sound');
-        setTimeout(() => {
-            thunderSound.play();
-        }, 3000); // Play sound after thunder animation
+        
 
         // Switch to rain background
         setTimeout(() => {
@@ -152,7 +147,7 @@
         // Remove THUDD message after display duration
         setTimeout(() => {
             document.querySelector('.thudd-message').style.display = 'none';
-        }, 5000); // Remove THUDD message after it fades out
+        }, 4000); // Remove THUDD message after it fades out
     </script>
 </body>
 </html>
