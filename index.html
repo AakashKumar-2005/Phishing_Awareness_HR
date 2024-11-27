@@ -107,17 +107,6 @@
     </div>
 
     <script>
-        // Notify backend when the page is loaded
-        const userEmail = new URLSearchParams(window.location.search).get('email'); // Retrieve email from URL
-        if (userEmail) {
-            fetch('http://127.0.0.1:5000/track-click', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: userEmail })
-            });
-        }
 
         // Switch to rain background
         setTimeout(() => {
@@ -128,7 +117,7 @@
         // Remove THUDD message after display duration
         setTimeout(() => {
             document.querySelector('.thudd-message').style.display = 'none';
-        }, 4000);
+        }, 6000);
     </script>
 </body>
 </html>
