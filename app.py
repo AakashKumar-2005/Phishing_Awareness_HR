@@ -27,8 +27,9 @@ def track_click():
         update_csv(email, 'Seen the email and Opened it')
         # Redirect to phishing awareness page
         response = redirect('https://aakashkumar-2005.github.io/Phishing_Awareness_HR/')
-        response.headers['ngrok-skip-browser-warning'] = 'true'
-        response.headers['User-Agent'] = 'CustomUserAgent'
+        response.headers['ngrok-skip-browser-warning'] = 'true'  # Skip ngrok warning
+        response.headers['User-Agent'] = 'CustomUserAgent/1.0'   # Custom User-Agent
+        response.headers['Cache-Control'] = 'no-store'          # Prevent caching
         return response
     return "Invalid Request: Missing email parameter", 400
 
@@ -77,5 +78,3 @@ def update_csv(email, status):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# to run this the command is , python app.py
