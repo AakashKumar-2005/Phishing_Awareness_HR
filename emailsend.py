@@ -10,7 +10,7 @@ SENDER_EMAIL = 'yamini582006@gmail.com'
 SENDER_PASSWORD = 'qemg fgtb lxzz ixbg'
 
 # Base URL for phishing links (replace with your ngrok public URL)
-TRACKING_URL = 'https://142b-2409-40f4-f-59b2-f5a9-9769-e495-cb32.ngrok-free.app/track-click?email='
+TRACKING_URL = 'https://5ad1-2405-201-e006-1075-f99e-7f9d-ccc2-cb66.ngrok-free.app/track-click?email='
 
 # Read recipient list from CSV
 recipients = pd.read_csv('email_list.csv')
@@ -24,18 +24,19 @@ def send_emails():
 
         # Loop through each recipient
         for _, row in recipients.iterrows():
-            redirecting = '&redirect=https://aakashkumar-2005.github.io/Phishing_Awareness_HR/'
             recipient_email = row['Email']
-            tracking_link = TRACKING_URL + recipient_email + redirecting
+            recipient_name = row['Name']  # Read the name from the CSV
+            tracking_link = TRACKING_URL + recipient_email 
 
             # Create the email content
-            subject = "Urgent: Review and Acknowledge the updated 2025 company policies"
+            subject = "Urgent: Review and Acknowledge the Updated 2025 Company Policies"
             body = f"""
             <html>
             <body>
-                <p>Dear [Employee Name],</p>
+                <p>Dear {recipient_name},</p>
 
-                <p>As part of our annual review, we have updated several key company policies for the year 2025. It is mandatory for all employees to review and acknowledge these changes to ensure compliance with the updated guidelines.</p>
+                <p>As part of our annual review, we have updated several key company policies for the year 2025. 
+                It is mandatory for all employees to review and acknowledge these changes to ensure compliance with the updated guidelines.</p>
 
                 <p>Please click the link below to review the updated policies and confirm your acknowledgment:</p>
 
