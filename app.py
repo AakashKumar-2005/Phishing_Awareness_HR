@@ -1,7 +1,6 @@
 from flask import Flask, request, redirect, Response
 import csv
 import os
-import ngrok
 from threading import Lock
 
 app = Flask(__name__)
@@ -16,7 +15,7 @@ file_lock = Lock()
 if not os.path.exists(CSV_FILE):
     with open(CSV_FILE, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Email', 'Status'])  # Add headers: Email, Status
+        writer.writerow(['Email','Name','Status'])  # Add headers: Email, Status
 
 
 # Route to track clicks
@@ -48,10 +47,8 @@ def track_view():
     return "Invalid Request: Missing email parameter", 400
 
 
-def update_csv(email, status):
-    """
-    Safely update the CSV file with the email status.
-    """
+def update_csv(email, status, name=None):
+    
     with file_lock:  # Ensure thread-safe access
         updated = False
         rows = []
@@ -63,16 +60,18 @@ def update_csv(email, status):
                 for row in reader:
                     if row['Email'] == email:
                         row['Status'] = status  # Update status
+                        if name:
+                            row['Name'] = name
                         updated = True
                     rows.append(row)
 
         # If the email wasn't found, append a new row
         if not updated:
-            rows.append({'Email': email, 'Status': status})
+            rows.append({'Name': name or 'Unknown' ,'Email': email, 'Status': status})
 
         # Write back all rows to the CSV
         with open(CSV_FILE, mode='w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=['Email', 'Status'])
+            writer = csv.DictWriter(file, fieldnames=['Name','Email', 'Status'])
             writer.writeheader()
             writer.writerows(rows)
 
