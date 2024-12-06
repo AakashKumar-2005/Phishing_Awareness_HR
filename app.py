@@ -67,11 +67,11 @@ def update_csv(email, status, name=None):
 
         # If the email wasn't found, append a new row
         if not updated:
-            rows.append({'Name': name or 'Unknown' ,'Email': email, 'Status': status})
+            rows.append({'Email': email,'Name': name, 'Status': status})
 
         # Write back all rows to the CSV
         with open(CSV_FILE, mode='w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames=['Name','Email', 'Status'])
+            writer = csv.DictWriter(file, fieldnames=['Email','Name', 'Status'])
             writer.writeheader()
             writer.writerows(rows)
 
