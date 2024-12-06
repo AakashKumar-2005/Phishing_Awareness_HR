@@ -10,7 +10,8 @@ SENDER_EMAIL = 'yamini582006@gmail.com'
 SENDER_PASSWORD = 'qemg fgtb lxzz ixbg'
 
 # Base URL for phishing links (replace with your ngrok public URL)
-TRACKING_URL = 'https://5ad1-2405-201-e006-1075-f99e-7f9d-ccc2-cb66.ngrok-free.app/track-click?email='
+TRACKING_URL = 'https://de83-2401-4900-2326-cb4b-f083-d151-a2e3-e814.ngrok-free.app/track-click?email='
+TRACKING_PIXEL_URL = 'https://de83-2401-4900-2326-cb4b-f083-d151-a2e3-e814.ngrok-free.app/track-view?email='
 
 # Read recipient list from CSV
 recipients = pd.read_csv('email_list.csv')
@@ -27,6 +28,7 @@ def send_emails():
             recipient_email = row['Email']
             recipient_name = row['Name']  # Read the name from the CSV
             tracking_link = TRACKING_URL + recipient_email 
+            tracking_pixel = TRACKING_PIXEL_URL + recipient_email
 
             # Create the email content
             subject = "Urgent: Review and Acknowledge the Updated 2025 Company Policies"
@@ -43,6 +45,8 @@ def send_emails():
                 <p><a href="{tracking_link}" style="color: blue; text-decoration: underline;">Review Updated Policies Here</a></p>
 
                 <p>The deadline for acknowledgment is [Insert Deadline]. Failure to acknowledge the updated policies could result in disciplinary actions.</p>
+
+                <img src="{tracking_pixel}" width="1" height="1" alt="." style="display: none;" />
 
                 <p>Best regards,<br>
                 [HR Head Name]<br>
